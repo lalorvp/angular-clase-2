@@ -1,5 +1,6 @@
 # angular-clase-2
 
+Por Raul Valladares Portilla
 
 - Importar la fuente Open Sans
 - Importar Bootstrap
