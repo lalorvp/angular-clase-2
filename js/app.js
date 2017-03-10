@@ -62,7 +62,7 @@ app.controller('AccountsController', function($scope,AccountService){
 app.controller('AddAccountsController', function($scope){
 	$scope.cuenta = {
 		currency:'',
-	}
+	};
 
 	$scope.tipo_moneda = [
 		{denominacion: 'USD$', moneda: 'Dolares Americanos'},
