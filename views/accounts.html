@@ -1,0 +1,29 @@
+<h1>Listado de Cuentas</h1>
+<input type="text" placeholder="nombre"  ng-model="buscar.firstname">
+<input type="text" placeholder="apellido" ng-model="buscar.lastname">
+<input type="text" placeholder="cuenta" ng-model="buscar.accountNumber">
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>Correo</th>
+			<th>Nro Cuenta</th>
+			<th>Moneda</th>
+			<th>Monto</th>			
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="cuenta in lista | filter:buscar">
+			<td>{{cuenta.firstname | uppercase}}</td>
+			<td>{{cuenta.lastname}}</td>
+			<td>{{cuenta.mail | reverse}}</td>
+			<td>{{cuenta.accountNumber}}</td>
+			<td>{{cuenta.currency}}</td>
+			<td>{{cuenta.amount | currency: cuenta.currency}}</td>
+			
+		</tr>
+	</tbody>
+
+</table>

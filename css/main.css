@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+
 *{
 	margin: 0;
 	padding: 0;
@@ -5,6 +7,59 @@
 
 html, body{
 	font-size: 16px;
+	font-family: 'Open Sans';
+	color: #333;
+}
+
+header{
+	background-color: #FFF;
+}
+
+header .container:after,
+header .container:before{
+	content: none;
+}
+
+header .container{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+nav{
+	background-color: #4d4c4c;
+	width: 10rem;
+	padding: 1rem;
+	position: fixed;
+	top: 5.375rem;
+	right: -10rem;
+	transition: right .5s ease;
+}
+
+nav.show{
+	right: 0;
+}
+
+nav ul{
+	margin: 0;
+	padding: 0;
+}
+
+nav ul li{
+	list-style: none;
+}
+
+nav ul li a{
+	color: #FFF;
+	text-transform: uppercase;/* mayusculas*/
+	font-weight: bold;
+	padding: .5rem;
+	display: block;
+}
+
+footer{
+	background-color: #222;
+	color: #FFF;	
 }
 
 

@@ -1,0 +1,35 @@
+<form ng-submit="onSubmit">
+  <div class="form-group">
+    <label for="nombre">Email address</label>
+    <input type="text" class="form-control" id="nombre" placeholder="nombre" ng-model="cuenta.firstname" required>
+  </div>
+
+  <div class="form-group">
+    <label for="apellido">Apellido</label>
+    <input type="text" class="form-control" id="apellido" placeholder="apellido" ng-model="cuenta.lastname" required>
+  </div>
+
+  <div class="form-group">
+    <label for="correo">Correo</label>
+    <input type="email" class="form-control" id="correo" placeholder="correo" ng-model="cuenta.mail" >
+  </div>
+
+  <div class="form-group">
+    <label for="nrocta">Nro. Cuenta</label>
+    <input type="text" class="form-control" id="nrocta" placeholder="nrocta" ng-model="cuenta.accountNumber" required>
+  </div>  
+
+  <div class="form-group">
+    <label for="moneda">Moneda</label>
+    <select name="" id="moneda" class="form-control" ng-options="item.denominacion as item.moneda for item in tipo_moneda" ng-model="cuenta.currency">
+    	<option value="0">Seleccione.. </option>
+    </select>
+  </div>  
+
+  <div class="form-group">
+    <label for="monto">monto</label>
+    <input type="number" class="form-control" id="monto" placeholder="monto" ng-model="cuenta.amount" required>
+  </div> 
+ 
+  <button type="submit" class="btn btn-default">Crear</button>
+</form>

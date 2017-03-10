@@ -2,9 +2,9 @@
 
 Por Raul Valladares Portilla
 
-- Importar la fuente Open Sans
-- Importar Bootstrap
-- Importar Font-awesome
+- Importar la fuente Open Sans(https://fonts.google.com) 
+- Importar Bootstrap(http://getbootstrap.com/)
+- Importar Font-awesome(https://fontawesome.io/)
 
 - Fondo header: #FFF
 - Fondo footer: #222
