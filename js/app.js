@@ -20,7 +20,12 @@ app.config(function($routeProvider, $locationProvider){
 	$locationProvider.hashPrefix("");
 });
 
-app.service('AccountService', function(){
+app.constant('Config',{
+	'BASE': 'http://192.168.1.35:3039/',
+	'ACCOUNTS':'accounts/',
+});
+
+app.service('AccountService', function(Config, $q, $http){
 
 	var accounts = [
 		{ id:1, firstname: 'Edmundo', lastname: 'Acosta', mail: 'eacosta@atypax.net', accountNumber:'189-123123123-1', amount:'8000.99', currency:'USD$' },
@@ -30,11 +35,42 @@ app.service('AccountService', function(){
 	];
 
 	function getAccount(){
-		return accounts;
+		var deferred = $q.defer();
+
+		$http.get(Config.BASE + Config.ACCOUNTS)
+			.then(function(response){
+				deferred.resolve(response);
+			});
+
+		return deferred.promise;
+	}
+
+	function saveAccount(params){
+		var deferred = $q.defer();
+
+		$http.post(Config.BASE + Config.ACCOUNTS,params)
+			.then(function(response){
+				deferred.resolve(response);
+			});
+
+		return 	deferred.promise;
+	}
+
+	function deleteAccount(id){
+		var deferred = $q.defer();
+
+		$http.delete(Config.BASE + Config.ACCOUNTS + id)
+			.then(function(response){
+				deferred.resolve(response);
+			});
+
+		return 	deferred.promise;
 	}
 
 	return{
-		listar: getAccount
+		listar: getAccount,
+		grabar: saveAccount,
+		eliminar: deleteAccount
 	}
 
 });
@@ -54,12 +90,32 @@ app.controller('HomeController', function($scope){
 
 app.controller('AccountsController', function($scope,AccountService){
 	//$scope.lista = [];
-	$scope.lista = AccountService.listar();
+	//$scope.lista = AccountService.listar();
+	function listar(){
+		AccountService.listar()
+			.then(function(response){
+				console.log(response);
+				$scope.lista = response.data.data;
+		});
+	}
 
-	
+	$scope.onDelete = function(id){
+		AccountService.eliminar(id)
+			.then(function(response){
+				if (response.data.status == 1) {
+					listar();
+				}else{
+					alert('Ocurrió un error');
+				}
+		});
+		
+	}
+
+	listar();	
 });
 
-app.controller('AddAccountsController', function($scope){
+app.controller('AddAccountsController', 
+	function($scope, AccountService, $location){
 	$scope.cuenta = {
 		currency:'',
 	};
@@ -71,6 +127,17 @@ app.controller('AddAccountsController', function($scope){
 
 	$scope.onSubmit = function(){
 		console.log('crear');
+
+		if ($scope.formulario.$valid) {
+			AccountService.grabar($scope.cuenta)
+				.then(function(response){
+					if(response.data.status ==1){
+						$location.path('/accounts');
+					}else{
+						alert('Ocurrio un error');
+					}
+				});			
+		}
 	}
 
 });
